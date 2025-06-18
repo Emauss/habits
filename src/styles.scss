@@ -1,0 +1,144 @@
+/* Global Styles */
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+body {
+  background-color: #f5f5f5;
+}
+
+/* Custom Material Theme Overrides */
+.mat-mdc-card {
+  border-radius: 12px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.mat-mdc-button {
+  border-radius: 8px !important;
+}
+
+.mat-mdc-raised-button {
+  border-radius: 8px !important;
+}
+
+/* Utility Classes */
+.full-width {
+  width: 100%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mt-16 {
+  margin-top: 16px;
+}
+
+.mb-16 {
+  margin-bottom: 16px;
+}
+
+.p-16 {
+  padding: 16px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+
+  &:hover {
+    background: #a8a8a8;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .mat-mdc-card {
+    margin: 8px;
+  }
+}
+
+/* Animation Classes */
+.fade-in {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* SCSS Variables for consistent theming */
+$primary-color: #3f51b5;
+$accent-color: #ff4081;
+$warn-color: #f44336;
+$success-color: #4caf50;
+$info-color: #2196f3;
+$warning-color: #ff9800;
+
+$text-primary: #333;
+$text-secondary: #666;
+$text-disabled: #999;
+
+$background-primary: #ffffff;
+$background-secondary: #f5f5f5;
+$background-tertiary: #fafafa;
+
+$border-color: #e0e0e0;
+$divider-color: #e0e0e0;
+
+$shadow-light: 0 2px 4px rgba(0, 0, 0, 0.1);
+$shadow-medium: 0 4px 8px rgba(0, 0, 0, 0.12);
+$shadow-heavy: 0 8px 16px rgba(0, 0, 0, 0.15);
+
+$border-radius-small: 4px;
+$border-radius-medium: 8px;
+$border-radius-large: 12px;
+
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+$spacing-xxl: 48px;

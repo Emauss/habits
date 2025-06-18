@@ -1,0 +1,177 @@
+.habit-list-container {
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+
+    .stat-card {
+      transition: transform 0.2s ease-in-out;
+
+      &:hover {
+        transform: translateY(-2px);
+      }
+
+      .stat-content {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+
+        .stat-icon {
+          font-size: 2.5em;
+          width: 1em;
+          height: 1em;
+          color: #666;
+
+          &.active {
+            color: #4caf50;
+          }
+
+          &.completed {
+            color: #2196f3;
+          }
+
+          &.streak {
+            color: #ff9800;
+          }
+        }
+
+        .stat-info {
+          .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #333;
+          }
+
+          .stat-label {
+            color: #666;
+            font-size: 0.9em;
+          }
+        }
+      }
+    }
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+
+    h1 {
+      margin: 0;
+      color: #333;
+    }
+  }
+
+  .habits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 20px;
+
+    .habit-card {
+      transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+      }
+
+      .habit-description {
+        color: #666;
+        margin-bottom: 16px;
+        line-height: 1.4;
+      }
+
+      .habit-stats {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 16px;
+
+        .stat {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 0.9em;
+          color: #666;
+
+          mat-icon {
+            font-size: 1.2em;
+            width: 1.2em;
+            height: 1.2em;
+          }
+        }
+      }
+
+      .progress-bar {
+        margin-bottom: 8px;
+      }
+
+      mat-card-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+
+        button {
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+
+          mat-icon {
+            font-size: 20px;
+            width: 20px;
+            height: 20px;
+          }
+        }
+      }
+    }
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 48px 24px;
+    color: #666;
+
+    .empty-icon {
+      font-size: 4em;
+      width: 1em;
+      height: 1em;
+      margin-bottom: 16px;
+      color: #ccc;
+    }
+
+    h2 {
+      margin-bottom: 8px;
+    }
+
+    p {
+      margin-bottom: 24px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .header {
+      flex-direction: column;
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .habits-grid {
+      grid-template-columns: 1fr;
+
+      .habit-card {
+        mat-card-actions {
+          flex-direction: column;
+
+          button {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}

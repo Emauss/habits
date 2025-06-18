@@ -1,0 +1,41 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  .navbar-icon {
+    margin-right: 8px;
+  }
+
+  .navbar-title {
+    font-size: 1.2em;
+    font-weight: 500;
+  }
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+
+  .navbar-nav {
+    display: flex;
+    gap: 8px;
+
+    a {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+
+      &.active {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .navbar-nav {
+      .nav-text {
+        display: none;
+      }
+    }
+  }
+}
