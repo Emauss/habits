@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
+import { trigger, transition, style, animate } from '@angular/animations';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -27,6 +28,20 @@ import { TodoListItemComponent } from '../todo-list-item/todo-list-item';
   ],
   templateUrl: './todo-list.html',
   styleUrl: './todo-list.scss',
+  animations: [
+    trigger('listAnimation', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(10px)' }),
+        animate('200ms ease-out', style({ opacity: 1, transform: 'none' })),
+      ]),
+      transition(':leave', [
+        animate(
+          '200ms ease-in',
+          style({ opacity: 0, transform: 'translateY(-10px)' })
+        ),
+      ]),
+    ]),
+  ],
 })
 export class TodoListComponent implements OnInit {
   todo$!: Observable<TodoItemModel[]>;
@@ -77,5 +92,9 @@ export class TodoListComponent implements OnInit {
   isCompletedToday(todoItem: TodoItemModel): boolean {
     const today = new Date().toISOString().split('T')[0];
     return todoItem.completedDates.includes(today);
+  }
+
+  trackById(_: number, item: TodoItemModel): string {
+    return item.id!;
   }
 }

@@ -1,6 +1,6 @@
 # 🧠 TODO List
 
-A todo list application built with **Angular**, **Firebase Firestore**, and **Angular Material**. Users can create, update, and complete own stuff with a focus on consistency and long-term progress.
+A todo list application built with **Angular**, **Firebase Firestore**, and **Angular Material**. Users can create, update, delete and complete own stuff.
 
 ## 🚀 Features
 

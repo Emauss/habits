@@ -55,13 +55,14 @@
   <!-- Loop with items  -->
   <div class="todo-grid" *ngIf="todo$ | async as todo">
     <app-todo-item
-      *ngFor="let todo of todo"
+      *ngFor="let todo of todo; trackBy: trackById"
       [todo]="todo"
       [isCompletedToday]="isCompletedToday(todo)"
       (view)="viewTodo($event)"
       (edit)="editTodo($event)"
       (delete)="deleteTodoItem($event.id, $event.name)"
       (mark)="markComplete($event)"
+      @listAnimation
     ></app-todo-item>
   </div>
 
