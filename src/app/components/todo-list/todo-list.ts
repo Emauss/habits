@@ -11,6 +11,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { AsyncPipe } from '@angular/common';
 import { TodoItemModel } from '../../models/todo.model';
 import { TodoService } from '../../services/todo';
+import { TodoListItemComponent } from '../todo-list-item/todo-list-item';
 
 @Component({
   selector: 'app-todo-list',
@@ -22,6 +23,7 @@ import { TodoService } from '../../services/todo';
     MatButtonModule,
     MatSnackBarModule,
     MatProgressBarModule,
+    TodoListItemComponent,
   ],
   templateUrl: './todo-list.html',
   styleUrl: './todo-list.scss',
@@ -35,6 +37,7 @@ export class TodoListComponent implements OnInit {
   private snackBar = inject(MatSnackBar);
 
   ngOnInit(): void {
+    // Important! Uncomment the following line to seed the todo list with initial data
     // this.todoService.seedTodoList();
     this.todo$ = this.todoService.getTodoItems();
     this.stats$ = this.todoService.getTodoListStats();

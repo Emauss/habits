@@ -24,18 +24,14 @@
           font-size: 2.5em;
           width: 1em;
           height: 1em;
-          color: #666;
+          color: #9e9e9e;
 
           &.active {
-            color: #4caf50;
+            color: #ff9800;
           }
 
           &.completed {
-            color: #2196f3;
-          }
-
-          &.streak {
-            color: #ff9800;
+            color: #4caf50;
           }
         }
 
@@ -69,15 +65,24 @@
 
   .todo-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     gap: 20px;
 
     .todo-card {
-      transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row;
+      transition: all 0.2s ease-in-out;
 
       &:hover {
         transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+      }
+
+      &-actions {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
       }
 
       .todo-description {
@@ -143,7 +148,9 @@
       grid-template-columns: 1fr;
 
       .todo-card {
-        mat-card-actions {
+        flex-direction: column;
+
+        &-actions {
           flex-direction: column;
 
           button {

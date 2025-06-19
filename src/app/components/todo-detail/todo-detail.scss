@@ -25,6 +25,10 @@
     grid-template-columns: 1fr 1fr;
     gap: 24px;
 
+    mat-card-header {
+      margin-bottom: 16px;
+    }
+
     .activity-card {
       grid-column: 1 / -1;
     }
@@ -122,10 +126,6 @@
           font-size: 0.9em;
         }
       }
-
-      .complete-button {
-        width: 100%;
-      }
     }
 
     .activity-card {
@@ -169,7 +169,9 @@
     }
   }
 
-  .progress-card {
+  .action-card {
+    text-align: center;
+
     mat-card-content {
       display: flex;
       flex-direction: column;
@@ -177,14 +179,23 @@
       height: 100%;
     }
 
-    .action-section {
-      margin-top: auto;
-      display: flex;
+    mat-card-header,
+    .action-title {
+      text-align: center;
       justify-content: center;
     }
 
-    .complete-button {
+    mat-card-actions {
+      flex-grow: 1;
+      height: 100%;
+    }
+
+    .action-section {
+      height: 100%;
       width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
     }
   }
 

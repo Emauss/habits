@@ -125,8 +125,8 @@ export class TodoService {
 
     const todoList: Omit<TodoItemModel, 'id'>[] = [
       {
-        name: 'Morning Run',
-        description: 'Go for a 30-minute jog every morning.',
+        name: 'Stretching Routine',
+        description: 'Do 15 minutes of full-body stretching.',
         category: 'Health',
         createdAt: now,
         updatedAt: now,
@@ -137,8 +137,8 @@ export class TodoService {
         ],
       },
       {
-        name: 'Read a Book',
-        description: 'Read 10 pages of a book each day.',
+        name: 'Watch Educational Video',
+        description: 'Watch one TED talk or tutorial.',
         category: 'Learning',
         createdAt: now,
         updatedAt: now,
@@ -150,8 +150,8 @@ export class TodoService {
         ],
       },
       {
-        name: 'Meditate',
-        description: '10 minutes meditation.',
+        name: 'Breathing Exercise',
+        description: 'Practice deep breathing for 5 minutes.',
         category: 'Wellness',
         createdAt: now,
         updatedAt: now,
@@ -165,8 +165,8 @@ export class TodoService {
         ],
       },
       {
-        name: 'Write Journal',
-        description: 'Write down 3 thoughts each day.',
+        name: 'Clear Email Inbox',
+        description: 'Empty inbox and respond to important emails.',
         category: 'Productivity',
         createdAt: now,
         updatedAt: now,
@@ -174,8 +174,8 @@ export class TodoService {
         completedDates: [formatDate(new Date(now.getTime() - 1 * 86400000))],
       },
       {
-        name: 'Drink Water',
-        description: 'Drink at least 2 liters of water daily.',
+        name: 'Prepare Healthy Meal',
+        description: 'Cook one nutritious meal with vegetables.',
         category: 'Health',
         createdAt: now,
         updatedAt: now,

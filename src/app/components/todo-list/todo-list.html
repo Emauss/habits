@@ -4,7 +4,7 @@
     <mat-card class="stat-card">
       <mat-card-content>
         <div class="stat-content">
-          <mat-icon class="stat-icon">track_changes</mat-icon>
+          <mat-icon class="stat-icon total">checklist</mat-icon>
           <div class="stat-info">
             <div class="stat-number">
               {{ (stats$ | async)?.totalTodoItems || 0 }}
@@ -18,7 +18,7 @@
     <mat-card class="stat-card">
       <mat-card-content>
         <div class="stat-content">
-          <mat-icon class="stat-icon active">play_circle</mat-icon>
+          <mat-icon class="stat-icon active">pending_actions</mat-icon>
           <div class="stat-info">
             <div class="stat-number">
               {{ (stats$ | async)?.activeTodoItems || 0 }}
@@ -32,26 +32,12 @@
     <mat-card class="stat-card">
       <mat-card-content>
         <div class="stat-content">
-          <mat-icon class="stat-icon completed">check_circle</mat-icon>
+          <mat-icon class="stat-icon completed">celebration</mat-icon>
           <div class="stat-info">
             <div class="stat-number">
               {{ (stats$ | async)?.completedToday || 0 }}
             </div>
             <div class="stat-label">Completed Today</div>
-          </div>
-        </div>
-      </mat-card-content>
-    </mat-card>
-
-    <mat-card class="stat-card">
-      <mat-card-content>
-        <div class="stat-content">
-          <mat-icon class="stat-icon streak">local_fire_department</mat-icon>
-          <div class="stat-info">
-            <div class="stat-number">
-              {{ (stats$ | async)?.averageStreak || 0 }}
-            </div>
-            <div class="stat-label">Avg. Streak</div>
           </div>
         </div>
       </mat-card-content>
@@ -66,55 +52,21 @@
     </button>
   </div>
 
+  <!-- Loop with items  -->
   <div class="todo-grid" *ngIf="todo$ | async as todo">
-    <mat-card class="todo-card" *ngFor="let todo of todo">
-      <mat-card-header>
-        <mat-card-title>{{ todo.name }}</mat-card-title>
-        <mat-card-subtitle>{{ todo.category }}</mat-card-subtitle>
-      </mat-card-header>
-
-      <mat-card-content>
-        <p class="todo-description">{{ todo.description }}</p>
-      </mat-card-content>
-
-      <mat-card-actions>
-        <button mat-button (click)="viewTodo(todo.id!)">
-          <mat-icon>visibility</mat-icon>
-          View
-        </button>
-        <button mat-button (click)="editTodo(todo.id!)">
-          <mat-icon>edit</mat-icon>
-          Edit
-        </button>
-        <button
-          mat-button
-          color="warn"
-          (click)="deleteTodoItem(todo.id!, todo.name)"
-        >
-          <mat-icon>delete</mat-icon>
-          Delete
-        </button>
-        <button
-          mat-button
-          color="primary"
-          (click)="markComplete(todo.id!)"
-          [disabled]="!todo.isActive || isCompletedToday(todo)"
-        >
-          <mat-icon>
-            {{ !todo.isActive ? 'block' : isCompletedToday(todo) ?
-            'check_circle' : 'check_circle_outline' }}
-          </mat-icon>
-          <span>
-            {{ !todo.isActive ? 'TODO Item Inactive' : isCompletedToday(todo) ?
-            'Completed Today' : 'Mark as Complete' }}
-          </span>
-        </button>
-      </mat-card-actions>
-    </mat-card>
+    <app-todo-item
+      *ngFor="let todo of todo"
+      [todo]="todo"
+      [isCompletedToday]="isCompletedToday(todo)"
+      (view)="viewTodo($event)"
+      (edit)="editTodo($event)"
+      (delete)="deleteTodoItem($event.id, $event.name)"
+      (mark)="markComplete($event)"
+    ></app-todo-item>
   </div>
 
   <div class="empty-state" *ngIf="(todo$ | async)?.length === 0">
-    <mat-icon class="empty-icon">track_changes</mat-icon>
+    <mat-icon class="empty-icon">checklist</mat-icon>
     <h2>No todo yet</h2>
     <p>Create your first todo to get started on your journey!</p>
     <button mat-raised-button color="primary" (click)="createTodoItem()">
