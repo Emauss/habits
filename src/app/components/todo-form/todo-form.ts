@@ -15,10 +15,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { HabitService } from '../../services/habit';
+import { TodoService } from '../../services/todo';
 
 @Component({
-  selector: 'app-habit-form',
+  selector: 'app-todo-form',
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -31,34 +31,34 @@ import { HabitService } from '../../services/habit';
     MatButtonModule,
     MatIconModule,
   ],
-  templateUrl: './habit-form.html',
-  styleUrl: './habit-form.scss',
+  templateUrl: './todo-form.html',
+  styleUrl: './todo-form.scss',
 })
-export class HabitFormComponent implements OnInit {
-  habitForm!: FormGroup;
+export class TodoFormComponent implements OnInit {
+  todoForm!: FormGroup;
   isEditMode = false;
   isSubmitting = false;
-  habitId?: string;
+  todoItemId?: string;
 
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   private snackBar = inject(MatSnackBar);
-  private habitService = inject(HabitService);
+  private todoService = inject(TodoService);
 
   ngOnInit(): void {
     this.initForm();
 
-    this.habitId = this.route.snapshot.paramMap.get('id') || undefined;
-    this.isEditMode = !!this.habitId;
+    this.todoItemId = this.route.snapshot.paramMap.get('id') || undefined;
+    this.isEditMode = !!this.todoItemId;
 
-    if (this.isEditMode && this.habitId) {
-      this.loadHabit(this.habitId);
+    if (this.isEditMode && this.todoItemId) {
+      this.loadTodo(this.todoItemId);
     }
   }
 
   private initForm(): void {
-    this.habitForm = this.fb.group({
+    this.todoForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
       description: ['', [Validators.required, Validators.minLength(5)]],
       category: ['Health', Validators.required],
@@ -66,50 +66,50 @@ export class HabitFormComponent implements OnInit {
     });
   }
 
-  private loadHabit(id: string): void {
-    this.habitService.getHabit(id).subscribe((habit) => {
-      if (habit) {
-        this.habitForm.patchValue({
-          name: habit.name,
-          description: habit.description,
-          category: habit.category,
-          isActive: habit.isActive,
+  private loadTodo(id: string): void {
+    this.todoService.getTodoItem(id).subscribe((todoItem) => {
+      if (todoItem) {
+        this.todoForm.patchValue({
+          name: todoItem.name,
+          description: todoItem.description,
+          category: todoItem.category,
+          isActive: todoItem.isActive,
         });
       }
     });
   }
 
   onSubmit(): void {
-    if (this.habitForm.valid) {
+    if (this.todoForm.valid) {
       this.isSubmitting = true;
-      const formValue = this.habitForm.value;
+      const formValue = this.todoForm.value;
 
-      if (this.isEditMode && this.habitId) {
-        this.habitService
-          .updateHabit(this.habitId, formValue)
+      if (this.isEditMode && this.todoItemId) {
+        this.todoService
+          .updateTodoItem(this.todoItemId, formValue)
           .then(() => {
-            this.snackBar.open('Habit updated successfully!', 'Close', {
+            this.snackBar.open('TODO Item updated successfully!', 'Close', {
               duration: 3000,
             });
-            this.router.navigate(['/habits']);
+            this.router.navigate(['/todo']);
           })
           .catch(() => {
-            this.snackBar.open('Error updating habit', 'Close', {
+            this.snackBar.open('Error updating todo item', 'Close', {
               duration: 3000,
             });
             this.isSubmitting = false;
           });
       } else {
-        this.habitService
-          .createHabit(formValue)
+        this.todoService
+          .createTodoItem(formValue)
           .then(() => {
-            this.snackBar.open('Habit created successfully!', 'Close', {
+            this.snackBar.open('TODO Item created successfully!', 'Close', {
               duration: 3000,
             });
-            this.router.navigate(['/habits']);
+            this.router.navigate(['/todo']);
           })
           .catch(() => {
-            this.snackBar.open('Error creating habit', 'Close', {
+            this.snackBar.open('Error creating todo item', 'Close', {
               duration: 3000,
             });
             this.isSubmitting = false;
@@ -119,6 +119,6 @@ export class HabitFormComponent implements OnInit {
   }
 
   onCancel(): void {
-    this.router.navigate(['/habits']);
+    this.router.navigate(['/todo']);
   }
 }

@@ -1,14 +1,11 @@
-# 🧠 Habit Tracker
+# 🧠 TODO List
 
-A habit-tracking application built with **Angular**, **Firebase Firestore**, and **Angular Material**. Users can create, update, track, and complete habits with a focus on consistency and long-term progress.
+A todo list application built with **Angular**, **Firebase Firestore**, and **Angular Material**. Users can create, update, and complete own stuff with a focus on consistency and long-term progress.
 
 ## 🚀 Features
 
-- Create, view, edit, and delete habits (CRUD)
-- Track **current** and **longest** streaks
-- Mark habits as complete for today
-- Auto-deactivates habits once target streak is reached
-- Dashboard with habit statistics
+- Create, view, edit, and delete stuff (CRUD)
+- Mark stuff as complete for today
 - Responsive UI using **Angular Material**
 - Data persistence using **Firebase Firestore**
 - Built with **Standalone Angular Components** (Angular 17+)
@@ -45,24 +42,13 @@ Then visit [`http://localhost:4200`](http://localhost:4200)
 
 ## 🧪 Mock Data Seeding
 
-You can seed example habits (with pre-filled streaks, completed dates, etc.) by calling this method in `HabitService`:
+You can seed example todo list (with categories, dates, etc.) by calling this method in `TodoService`:
 
 ```ts
-this.habitService.seedHabits();
+this.todoService.seedTodoList();
 ```
 
 This is helpful for local testing and UI development. Remember to remove the call after seeding to prevent duplicate records.
-
-## 🧱 Project Structure
-
-```
-src/
-├── app/
-│   ├── components/         # UI components (dashboard, habit list, form, detail)
-│   ├── models/             # Habit model interface
-│   ├── services/           # Firestore habit service
-│   └── app.routes.ts       # Routing configuration
-```
 
 ## 🔨 Build
 

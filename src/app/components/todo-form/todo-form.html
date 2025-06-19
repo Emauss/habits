@@ -1,28 +1,36 @@
-<div class="habit-form-container">
+<div class="todo-form-container">
   <mat-card class="form-card">
     <mat-card-header>
-      <mat-card-title>{{ isEditMode ? 'Edit Habit' : 'Create New Habit' }}</mat-card-title>
+      <mat-card-title
+        >{{ isEditMode ? 'Edit TODO Item' : 'Create New TODO Item'
+        }}</mat-card-title
+      >
     </mat-card-header>
 
     <mat-card-content>
-      <form [formGroup]="habitForm" (ngSubmit)="onSubmit()" class="habit-form">
+      <form [formGroup]="todoForm" (ngSubmit)="onSubmit()" class="todo-form">
         <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Habit Name</mat-label>
-          <input matInput formControlName="name" placeholder="e.g., Morning Exercise">
-          <mat-error *ngIf="habitForm.get('name')?.hasError('required')">
-            Habit name is required
+          <mat-label>TODO Item Name</mat-label>
+          <input
+            matInput
+            formControlName="name"
+            placeholder="e.g., Morning Exercise"
+          />
+          <mat-error *ngIf="todoForm.get('name')?.hasError('required')">
+            TODO Item name is required
           </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Description</mat-label>
-          <textarea 
-            matInput 
-            formControlName="description" 
+          <textarea
+            matInput
+            formControlName="description"
             rows="3"
-            placeholder="Describe your habit...">
+            placeholder="Describe your stuff..."
+          >
           </textarea>
-          <mat-error *ngIf="habitForm.get('description')?.hasError('required')">
+          <mat-error *ngIf="todoForm.get('description')?.hasError('required')">
             Description is required
           </mat-error>
         </mat-form-field>
@@ -39,7 +47,7 @@
               <mat-option value="Creative">Creative</mat-option>
               <mat-option value="Other">Other</mat-option>
             </mat-select>
-            <mat-error *ngIf="habitForm.get('category')?.hasError('required')">
+            <mat-error *ngIf="todoForm.get('category')?.hasError('required')">
               Category is required
             </mat-error>
           </mat-form-field>
@@ -47,21 +55,20 @@
 
         <div class="form-row">
           <mat-checkbox formControlName="isActive">
-            Active Habit
+            Active TODO Item
           </mat-checkbox>
         </div>
       </form>
     </mat-card-content>
 
     <mat-card-actions class="form-actions">
-      <button mat-button type="button" (click)="onCancel()">
-        Cancel
-      </button>
-      <button 
-        mat-raised-button 
-        color="primary" 
+      <button mat-button type="button" (click)="onCancel()">Cancel</button>
+      <button
+        mat-raised-button
+        color="primary"
         (click)="onSubmit()"
-        [disabled]="habitForm.invalid || isSubmitting">
+        [disabled]="todoForm.invalid || isSubmitting"
+      >
         <mat-icon *ngIf="isSubmitting">hourglass_empty</mat-icon>
         {{ isSubmitting ? 'Saving...' : (isEditMode ? 'Update' : 'Create') }}
       </button>

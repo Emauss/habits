@@ -8,11 +8,11 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { AsyncPipe } from '@angular/common';
 import { Observable } from 'rxjs';
-import { HabitService } from '../../services/habit';
-import { HabitModel } from '../../models/habit.model';
+import { TodoService } from '../../services/todo';
+import { TodoItemModel } from '../../models/todo.model';
 
 @Component({
-  selector: 'app-habit-detail',
+  selector: 'app-todo-detail',
   imports: [
     CommonModule,
     AsyncPipe,
@@ -22,42 +22,42 @@ import { HabitModel } from '../../models/habit.model';
     MatSnackBarModule,
     MatProgressBarModule,
   ],
-  templateUrl: './habit-detail.html',
-  styleUrls: ['./habit-detail.scss'],
+  templateUrl: './todo-detail.html',
+  styleUrls: ['./todo-detail.scss'],
 })
-export class HabitDetailComponent implements OnInit {
-  habit$!: Observable<HabitModel | undefined>;
-  habitId!: string;
+export class TodoDetailComponent implements OnInit {
+  todoItem$!: Observable<TodoItemModel | undefined>;
+  todoItemId!: string;
 
   private route = inject(ActivatedRoute);
   private router = inject(Router);
-  private habitService = inject(HabitService);
+  private todoService = inject(TodoService);
   private snackBar = inject(MatSnackBar);
 
   ngOnInit(): void {
-    this.habitId = this.route.snapshot.paramMap.get('id')!;
-    this.habit$ = this.habitService.getHabit(this.habitId);
+    this.todoItemId = this.route.snapshot.paramMap.get('id')!;
+    this.todoItem$ = this.todoService.getTodoItem(this.todoItemId);
   }
 
   goBack(): void {
-    this.router.navigate(['/habits']);
+    this.router.navigate(['/todo']);
   }
 
-  editHabit(): void {
-    this.router.navigate(['/habits/edit', this.habitId]);
+  editTodo(): void {
+    this.router.navigate(['/todo/edit', this.todoItemId]);
   }
 
-  deleteHabit(): void {
-    this.habit$.subscribe((habit) => {
+  deleteTodoItem(): void {
+    this.todoItem$.subscribe((todoItem) => {
       if (
-        habit &&
-        confirm(`Are you sure you want to delete "${habit.name}"?`)
+        todoItem &&
+        confirm(`Are you sure you want to delete "${todoItem.name}"?`)
       ) {
-        this.habitService.deleteHabit(this.habitId).then(() => {
-          this.snackBar.open('Habit deleted successfully', 'Close', {
+        this.todoService.deleteTodoItem(this.todoItemId).then(() => {
+          this.snackBar.open('TODO Item deleted successfully', 'Close', {
             duration: 3000,
           });
-          this.router.navigate(['/habits']);
+          this.router.navigate(['/todo']);
         });
       }
     });
@@ -65,21 +65,21 @@ export class HabitDetailComponent implements OnInit {
 
   markComplete(): void {
     const today = new Date().toISOString().split('T')[0];
-    this.habitService.markHabitComplete(this.habitId, today).then(() => {
-      this.snackBar.open('Habit  marked as complete!', 'Close', {
+    this.todoService.markTodoItemComplete(this.todoItemId, today).then(() => {
+      this.snackBar.open('TODO Item  marked as complete!', 'Close', {
         duration: 3000,
       });
-      this.habit$ = this.habitService.getHabit(this.habitId);
+      this.todoItem$ = this.todoService.getTodoItem(this.todoItemId);
     });
   }
 
-  isCompletedToday(habit: HabitModel): boolean {
+  isCompletedToday(todoItem: TodoItemModel): boolean {
     const today = new Date().toISOString().split('T')[0];
-    return habit.completedDates.includes(today);
+    return todoItem.completedDates.includes(today);
   }
 
-  getRecentDates(habit: HabitModel): string[] {
-    return habit.completedDates
+  getRecentDates(todoItem: TodoItemModel): string[] {
+    return todoItem.completedDates
       .sort((a, b) => new Date(b).getTime() - new Date(a).getTime())
       .slice(0, 10);
   }

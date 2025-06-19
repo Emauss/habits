@@ -1,0 +1,80 @@
+<div class="todo-detail-container" *ngIf="todoItem$ | async as todo">
+  <div class="header">
+    <button mat-icon-button (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1>{{ todo.name }}</h1>
+    <div class="header-actions">
+      <button mat-button (click)="editTodo()">
+        <mat-icon>edit</mat-icon>
+        Edit
+      </button>
+      <button mat-button color="warn" (click)="deleteTodoItem()">
+        <mat-icon>delete</mat-icon>
+        Delete
+      </button>
+    </div>
+  </div>
+
+  <div class="content-grid">
+    <!-- TODO Item Info Card -->
+    <mat-card class="info-card">
+      <mat-card-header>
+        <mat-card-title>TODO Item Information</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="info-item">
+          <mat-icon>description</mat-icon>
+          <div>
+            <strong>Description</strong>
+            <p>{{ todo.description }}</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <mat-icon>category</mat-icon>
+          <div>
+            <strong>Category</strong>
+            <p>{{ todo.category }}</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <mat-icon
+            >{{ todo.isActive ? 'play_circle' : 'pause_circle' }}</mat-icon
+          >
+          <div>
+            <strong>Status</strong>
+            <p>{{ todo.isActive ? 'Active' : 'Inactive' }}</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Progress Card -->
+    <mat-card class="progress-card">
+      <mat-card-header>
+        <mat-card-title>Progress & Stats</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="action-section">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="markComplete()"
+            [disabled]="!todo.isActive || isCompletedToday(todo)"
+            class="complete-button"
+          >
+            <mat-icon>
+              {{ !todo.isActive ? 'block' : isCompletedToday(todo) ?
+              'check_circle' : 'check_circle_outline' }}
+            </mat-icon>
+
+            <span>
+              {{ !todo.isActive ? 'TODO Item Inactive' : isCompletedToday(todo)
+              ? 'Completed Today' : 'Mark as Complete' }}
+            </span>
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

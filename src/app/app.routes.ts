@@ -1,13 +1,13 @@
 import { Routes } from '@angular/router';
-import { HabitListComponent } from './components/habit-list/habit-list';
-import { HabitDetailComponent } from './components/habit-detail/habit-detail';
-import { HabitFormComponent } from './components/habit-form/habit-form';
+import { TodoListComponent } from './components/todo-list/todo-list';
+import { TodoDetailComponent } from './components/todo-detail/todo-detail';
+import { TodoFormComponent } from './components/todo-form/todo-form';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/habits', pathMatch: 'full' },
-  { path: 'habits', component: HabitListComponent },
-  { path: 'habits/new', component: HabitFormComponent },
-  { path: 'habits/edit/:id', component: HabitFormComponent },
-  { path: 'habits/:id', component: HabitDetailComponent },
-  { path: '**', redirectTo: '/habits' },
+  { path: '', redirectTo: '/todo', pathMatch: 'full' },
+  { path: 'todo', component: TodoListComponent },
+  { path: 'todo/new', component: TodoFormComponent },
+  { path: 'todo/edit/:id', component: TodoFormComponent },
+  { path: 'todo/:id', component: TodoDetailComponent },
+  { path: '**', redirectTo: '/todo' },
 ];

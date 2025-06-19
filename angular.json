@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "habit-tracker-ng": {
+    "todo-list-ng": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -18,9 +18,7 @@
           "builder": "@angular/build:application",
           "options": {
             "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -62,10 +60,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "habit-tracker-ng:build:production"
+              "buildTarget": "todo-list-ng:build:production"
             },
             "development": {
-              "buildTarget": "habit-tracker-ng:build:development"
+              "buildTarget": "todo-list-ng:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,10 +74,7 @@
         "test": {
           "builder": "@angular/build:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [

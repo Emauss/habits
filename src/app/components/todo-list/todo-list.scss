@@ -1,4 +1,4 @@
-.habit-list-container {
+.todo-list-container {
   max-width: 1200px;
   margin: 0 auto;
 
@@ -67,12 +67,12 @@
     }
   }
 
-  .habits-grid {
+  .todo-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     gap: 20px;
 
-    .habit-card {
+    .todo-card {
       transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 
       &:hover {
@@ -80,31 +80,10 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
       }
 
-      .habit-description {
+      .todo-description {
         color: #666;
         margin-bottom: 16px;
         line-height: 1.4;
-      }
-
-      .habit-stats {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        margin-bottom: 16px;
-
-        .stat {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          font-size: 0.9em;
-          color: #666;
-
-          mat-icon {
-            font-size: 1.2em;
-            width: 1.2em;
-            height: 1.2em;
-          }
-        }
       }
 
       .progress-bar {
@@ -160,10 +139,10 @@
       align-items: stretch;
     }
 
-    .habits-grid {
+    .todo-grid {
       grid-template-columns: 1fr;
 
-      .habit-card {
+      .todo-card {
         mat-card-actions {
           flex-direction: column;
 

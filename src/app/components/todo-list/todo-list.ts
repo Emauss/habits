@@ -9,11 +9,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { AsyncPipe } from '@angular/common';
-import { HabitModel } from '../../models/habit.model';
-import { HabitService } from '../../services/habit';
+import { TodoItemModel } from '../../models/todo.model';
+import { TodoService } from '../../services/todo';
 
 @Component({
-  selector: 'app-habit-list',
+  selector: 'app-todo-list',
   imports: [
     CommonModule,
     AsyncPipe,
@@ -23,39 +23,39 @@ import { HabitService } from '../../services/habit';
     MatSnackBarModule,
     MatProgressBarModule,
   ],
-  templateUrl: './habit-list.html',
-  styleUrl: './habit-list.scss',
+  templateUrl: './todo-list.html',
+  styleUrl: './todo-list.scss',
 })
-export class HabitListComponent implements OnInit {
-  habits$!: Observable<HabitModel[]>;
+export class TodoListComponent implements OnInit {
+  todo$!: Observable<TodoItemModel[]>;
   stats$!: Observable<any>;
 
-  private habitService = inject(HabitService);
+  private todoService = inject(TodoService);
   private router = inject(Router);
   private snackBar = inject(MatSnackBar);
 
   ngOnInit(): void {
-    // this.habitService.seedHabits();
-    this.habits$ = this.habitService.getHabits();
-    this.stats$ = this.habitService.getHabitStats();
+    // this.todoService.seedTodoList();
+    this.todo$ = this.todoService.getTodoItems();
+    this.stats$ = this.todoService.getTodoListStats();
   }
 
-  createHabit(): void {
-    this.router.navigate(['/habits/new']);
+  createTodoItem(): void {
+    this.router.navigate(['/todo/new']);
   }
 
-  viewHabit(id: string): void {
-    this.router.navigate(['/habits', id]);
+  viewTodo(id: string): void {
+    this.router.navigate(['/todo', id]);
   }
 
-  editHabit(id: string): void {
-    this.router.navigate(['/habits/edit', id]);
+  editTodo(id: string): void {
+    this.router.navigate(['/todo/edit', id]);
   }
 
-  deleteHabit(id: string, name: string): void {
+  deleteTodoItem(id: string, name: string): void {
     if (confirm(`Are you sure you want to delete "${name}"?`)) {
-      this.habitService.deleteHabit(id).then(() => {
-        this.snackBar.open('Habit deleted successfully', 'Close', {
+      this.todoService.deleteTodoItem(id).then(() => {
+        this.snackBar.open('TODO Item deleted successfully', 'Close', {
           duration: 3000,
         });
       });
@@ -64,15 +64,15 @@ export class HabitListComponent implements OnInit {
 
   markComplete(id: string): void {
     const today = new Date().toISOString().split('T')[0];
-    this.habitService.markHabitComplete(id, today).then(() => {
-      this.snackBar.open('Habit marked as complete!', 'Close', {
+    this.todoService.markTodoItemComplete(id, today).then(() => {
+      this.snackBar.open('TODO Item marked as complete!', 'Close', {
         duration: 3000,
       });
     });
   }
 
-  isCompletedToday(habit: HabitModel): boolean {
+  isCompletedToday(todoItem: TodoItemModel): boolean {
     const today = new Date().toISOString().split('T')[0];
-    return habit.completedDates.includes(today);
+    return todoItem.completedDates.includes(today);
   }
 }

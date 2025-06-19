@@ -1,11 +1,11 @@
-.habit-form-container {
+.todo-form-container {
   max-width: 600px;
   margin: 0 auto;
 
   .form-card {
     margin-top: 20px;
 
-    .habit-form {
+    .todo-form {
       display: flex;
       flex-direction: column;
       gap: 16px;
@@ -35,7 +35,7 @@
 
   @media (max-width: 768px) {
     .form-card {
-      .habit-form {
+      .todo-form {
         .form-row {
           flex-direction: column;
           gap: 8px;
